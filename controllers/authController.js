@@ -2,7 +2,9 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
 
-
+// This endpoint is responsible for registering a user in the database. 
+// It checks if the user already exists, hashes the password, and then creates a new user. 
+// Finally, it returns the user data along with a JWT token for authentication.
 exports.registerUser = async (req, res) => {
 
     try {
@@ -16,7 +18,7 @@ exports.registerUser = async (req, res) => {
 
         const userExists = await User.findOne({ email });
 
-        if (userExits) {
+        if (userExists) {
             return res.status(400).json({
                 message: "User already exists"
             });
@@ -53,6 +55,8 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+// This endpoint is responsible for logging in a user. 
+// It checks if the user exists, compares the provided password with the hashed password in the database, and if they match, it returns the user data along with a JWT token for authentication.
 exports.loginUser = async (req, res) => {
 
     try {
@@ -61,7 +65,7 @@ exports.loginUser = async (req, res) => {
 
         if (!user) {
             return  res.status(400).json({
-                message: "Invaild credentials"
+                message: "Invalid credentials"
             });
         }
 
@@ -72,7 +76,7 @@ exports.loginUser = async (req, res) => {
 
         if (!isMatch) {
             return res.status(400).json({
-                message: "Invaild credentials"
+                message: "Invalid credentials"
             });
         }
 

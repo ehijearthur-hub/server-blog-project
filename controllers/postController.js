@@ -24,7 +24,9 @@ exports.createPost = async (req, res) => {
 exports.getPosts = async (req, res) => {
 
     try {
-        const posts = (await Post.find().populate("author", "username")).sort({ createdAt: -1 });
+        const posts = await Post.find().populate("author", "username");
+        
+        posts.sort((a, b) => b.createdAt - a.createdAt);
 
         res.status(200).json(posts);
 
@@ -81,7 +83,7 @@ exports.updatePost = async (req, res) => {
         
         const updatePost = await post.save();
         
-        res.status(200).json(updatedPost);
+        res.status(200).json(updatePost);
     
     } catch (error) {
         res.status(500).json({
@@ -125,7 +127,7 @@ exports.deletePost = async (req, res) => {
 exports.searchPosts = async (req, res) => {
 
     try {
-        const keyword = req.query.search;
+        const keyword = req.query.search || "";
         const posts = await Post.find({
             title: {
                 $regex: keyword,

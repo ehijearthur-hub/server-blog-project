@@ -8,6 +8,7 @@ const protect = async (req, res, next) => {
         let token;
 
         if (
+            
 
             req.headers.authorization &&
 
@@ -15,8 +16,9 @@ const protect = async (req, res, next) => {
 
         ) {
 
-            token = req.authorization.split(" ")[1];
-
+            token = req.headers.authorization.split(" ")[1];
+console.log(req.headers.authorization);
+console.log(token);
             const decoded = jwt.verify(
                 token, process.env.JWT_SECRET
             );
@@ -34,10 +36,12 @@ const protect = async (req, res, next) => {
 
     } catch (error) {
 
-        return res.status(401).json({
-            message: "Not authorized, token failed"
-        });
-    }
+    console.log("JWT ERROR:", error.message);
+
+    return res.status(401).json({
+        message: error.message
+    });
+}
 
 }
 
