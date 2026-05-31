@@ -17,8 +17,6 @@ const protect = async (req, res, next) => {
         ) {
 
             token = req.headers.authorization.split(" ")[1];
-console.log(req.headers.authorization);
-console.log(token);
             const decoded = jwt.verify(
                 token, process.env.JWT_SECRET
             );
@@ -35,8 +33,6 @@ console.log(token);
         }
 
     } catch (error) {
-
-    console.log("JWT ERROR:", error.message);
 
     return res.status(401).json({
         message: error.message
