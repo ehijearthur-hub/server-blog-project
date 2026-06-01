@@ -21,6 +21,7 @@ exports.createPost = async (req, res) => {
     }
 };
 
+// This is what gets all the blog posts
 exports.getPosts = async (req, res) => {
 
     try {
@@ -37,6 +38,7 @@ exports.getPosts = async (req, res) => {
     }
 };
 
+// This is what gets a single blog post by its ID
 exports.getSinglePost = async (req, res) => {
 
     try {
@@ -57,6 +59,7 @@ exports.getSinglePost = async (req, res) => {
     }
 };
 
+// This is what updates a blog post. It checks if the post exists and if the user is the author before allowing the update.
 exports.updatePost = async (req, res) => {
 
     try {
@@ -93,6 +96,7 @@ exports.updatePost = async (req, res) => {
 
 };
 
+// This is what deletes a blog post. It checks if the post exists and if the user is the author before allowing the deletion.
 exports.deletePost = async (req, res) => {
 
     try {
