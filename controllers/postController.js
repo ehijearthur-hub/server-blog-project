@@ -128,6 +128,7 @@ exports.deletePost = async (req, res) => {
 
 };
 
+// This is search for posts by title. It uses a regular expression to find posts that match the search keyword, ignoring case sensitivity.
 exports.searchPosts = async (req, res) => {
 
     try {
@@ -149,7 +150,7 @@ exports.searchPosts = async (req, res) => {
 
 };
 
-
+// This is what gets all the boosted posts. It filters the posts to return only those that have been marked as boosted.
 exports.getBoostedPosts = async (req, res) => {
 
     try {

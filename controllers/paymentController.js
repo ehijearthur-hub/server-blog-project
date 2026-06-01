@@ -1,6 +1,8 @@
 const paystack = require("../config/paystack");
 const Post = require("../models/Post");
 
+// This is what initiates a payment for boosting a post. 
+// It checks if the post exists and if the user is the author before creating a payment transaction with Paystack.
 exports.initiatePayment = async (req, res) => {
 
     try {
@@ -38,6 +40,7 @@ exports.initiatePayment = async (req, res) => {
     }
 };
 
+// This is what verifies the payment after the user has completed the transaction on Paystack.
 exports.verifyPayment = async (req, res) => {
   try {
     const { reference } = req.body;
