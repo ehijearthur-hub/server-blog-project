@@ -1,0 +1,19 @@
+const express = require("express");
+const router = express.Router();
+
+const protect = require("../middleware/authMiddleware");
+
+const {
+    createComment,
+    getPostComments,
+    deleteComment,
+} = require("../controllers/commentController");
+
+
+router.post("/:postId", protect, createComment);
+
+router.get("/:postId", getPostComments);
+
+router.delete("/delete/:commentId", protect, deleteComment);
+
+module.exports = router;
